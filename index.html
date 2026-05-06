@@ -1,0 +1,2588 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+  <title>Movik Pages — Tecnología en movimiento</title>
+  <meta name="description"
+    content="Movik Pages: creación de sitios web estáticos, marketing digital, redes sociales y aplicativos. Presencia digital de alto impacto para tu negocio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────────── */
+    :root {
+      --accent: #00e5ff;
+      --accent2: #7c3aed;
+      --danger: #ff3c5f;
+      --radius: 18px;
+      --nav-h: 72px;
+      --transition: .35s cubic-bezier(.4, 0, .2, 1);
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg: #080c12;
+      --bg2: #0e1420;
+      --bg3: #151c2c;
+      --surface: #1a2236;
+      --border: rgba(0, 229, 255, .1);
+      --text: #e8edf5;
+      --muted: #7a8ba0;
+      --card-glow: rgba(0, 229, 255, .07);
+    }
+
+    [data-theme="light"] {
+      --bg: #f4f7fc;
+      --bg2: #eaf0fb;
+      --bg3: #dce6f6;
+      --surface: #ffffff;
+      --border: rgba(0, 120, 200, .13);
+      --text: #111827;
+      --muted: #5a6a82;
+      --card-glow: rgba(0, 120, 200, .06);
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      transition: background var(--transition), color var(--transition);
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit;
+    }
+
+    /* ─── SCROLLBAR ───────────────────────────────────────────────── */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 99px;
+    }
+
+    /* ─── UTILITY ─────────────────────────────────────────────────── */
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-sm {
+      padding: 60px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(0, 229, 255, .08);
+      border: 1px solid rgba(0, 229, 255, .2);
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .accent {
+      color: var(--accent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .92rem;
+      padding: 14px 30px;
+      border-radius: 99px;
+      transition: all var(--transition);
+      letter-spacing: .04em;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #080c12;
+    }
+
+    .btn-primary:hover {
+      background: #33ecff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 229, 255, .35);
+    }
+
+    .btn-outline {
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-ghost {
+      color: var(--accent);
+      padding: 0;
+      font-size: .9rem;
+    }
+
+    .btn-ghost:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── NOISE OVERLAY ───────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: .025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      background: rgba(8, 12, 18, .82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+
+    [data-theme="light"] nav {
+      background: rgba(244, 247, 252, .88);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -.01em;
+    }
+
+    /* ── LOGO PLACEHOLDER — sustituye la img por tu archivo de logo ── */
+    .logo-mark {
+      /* Cuando tengas el logo: cambia el background por: background: url('assets/logo.svg') center/contain no-repeat; */
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .nav-links a {
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all var(--transition);
+      color: var(--text);
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: var(--nav-h) 0 0 0;
+      background: var(--bg2);
+      z-index: 99;
+      padding: 32px 24px;
+      flex-direction: column;
+      gap: 24px;
+      animation: slideDown .25s ease;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      transition: color var(--transition);
+    }
+
+    .mobile-menu a:hover {
+      color: var(--accent);
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ─── HERO ────────────────────────────────────────────────────── */
+    .hero {
+      min-height: calc(100svh - var(--nav-h));
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 229, 255, .06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, .06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    [data-theme="light"] .hero-grid {
+      background-image:
+        linear-gradient(rgba(0, 100, 200, .06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 100, 200, .06) 1px, transparent 1px);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 229, 255, .12) 0%, transparent 70%);
+      top: -200px;
+      right: -200px;
+      pointer-events: none;
+    }
+
+    .hero-glow2 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 58, 237, .1) 0%, transparent 70%);
+      bottom: -100px;
+      left: -100px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 720px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(0, 229, 255, .07);
+      border: 1px solid rgba(0, 229, 255, .18);
+      padding: 6px 16px;
+      border-radius: 99px;
+      margin-bottom: 28px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .3;
+      }
+    }
+
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -.02em;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.12rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 40px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 64px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .stat-num.stat-symbol {
+      font-size: 4.2rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 2rem;
+      /* match other stat-num height */
+    }
+
+    .stat-label {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ─── SERVICES TICKER ──────────────────────────────────────────── */
+    .ticker-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      background: var(--bg2);
+    }
+
+    .ticker {
+      display: flex;
+      gap: 0;
+      animation: ticker 25s linear infinite;
+      white-space: nowrap;
+    }
+
+    .ticker:hover {
+      animation-play-state: paused;
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 32px;
+      font-family: var(--font-head);
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .ticker-item .dot {
+      width: 5px;
+      height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    @keyframes ticker {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ─── PRODUCTS ─────────────────────────────────────────────────── */
+    .products-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .level-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .level-tab {
+      padding: 8px 20px;
+      border-radius: 99px;
+      font-family: var(--font-head);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      transition: all var(--transition);
+      background: transparent;
+    }
+
+    .level-tab.active,
+    .level-tab:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0, 229, 255, .06);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* CARD */
+    .card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: all var(--transition);
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--card-glow);
+      opacity: 0;
+      transition: opacity var(--transition);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .25);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card.featured {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, var(--surface), rgba(0, 229, 255, .05));
+    }
+
+    /* ── BADGE — parche sobre la esquina de la imagen ── */
+    .card-img-wrap {
+      position: relative;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      font-size: .7rem;
+      font-weight: 700;
+      font-family: var(--font-head);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+    }
+
+    .badge-recommended {
+      background: var(--accent);
+      color: #080c12;
+    }
+
+    .badge-monthly {
+      background: rgba(30, 10, 60, .85);
+      color: #c4b5fd;
+      border: 1px solid rgba(167, 139, 250, .45);
+      backdrop-filter: blur(6px);
+    }
+
+    .badge-contact {
+      background: rgba(60, 10, 20, .85);
+      color: #ff6b8a;
+      border: 1px solid rgba(255, 60, 95, .35);
+      backdrop-filter: blur(6px);
+    }
+
+    /* ── FLYER PLACEHOLDER — señal donde va tu imagen ── */
+    .card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      position: relative;
+      /* Cuando pongas la img real: <img src="..." class="card-img" style="object-fit:cover;border-radius:10px;"> */
+    }
+
+    .card-img-label {
+      text-align: center;
+      font-family: var(--font-head);
+      font-size: .68rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    /* El nivel y nombre van ANTES de la imagen en el DOM — el flex-direction:column los ubica arriba */
+    .card-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .card-level {
+      font-size: .72rem;
+      font-weight: 600;
+      font-family: var(--font-head);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .card-name {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .price-block {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+      row-gap: 4px;
+    }
+
+    .price-old {
+      font-size: .95rem;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .price-new {
+      font-family: var(--font-head);
+      font-size: clamp(1.3rem, 2vw, 1.75rem);
+      font-weight: 800;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .price-period {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .card-features {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .87rem;
+      color: var(--muted);
+    }
+
+    .feature-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(0, 229, 255, .12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: .65rem;
+      color: var(--accent);
+      margin-top: 1px;
+    }
+
+    .card-cta {
+      margin-top: auto;
+    }
+
+    .btn-card {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .88rem;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      background: rgba(0, 229, 255, .06);
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-card:hover {
+      background: var(--accent);
+      color: #080c12;
+    }
+
+    .btn-card.primary {
+      background: var(--accent);
+      color: #080c12;
+      border-color: var(--accent);
+    }
+
+    .btn-card.primary:hover {
+      background: #33ecff;
+    }
+
+    .btn-card.whatsapp-btn {
+      border-color: #25d366;
+      color: #25d366;
+      background: rgba(37, 211, 102, .06);
+    }
+
+    .btn-card.whatsapp-btn:hover {
+      background: #25d366;
+      color: #fff;
+    }
+
+    .btn-card.wompi-btn {
+      border-color: var(--accent2);
+      color: #a78bfa;
+      background: rgba(124, 58, 237, .06);
+    }
+
+    .btn-card.wompi-btn:hover {
+      background: var(--accent2);
+      color: #fff;
+    }
+
+    /* STAR CARD */
+    .star-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, var(--bg3), rgba(0, 229, 255, .06));
+      border: 1.5px solid var(--accent);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .star-card-left {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .star-card-right {
+      background: linear-gradient(135deg, rgba(0, 229, 255, .08), rgba(124, 58, 237, .08));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      padding: 40px;
+      border-left: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .star-card-label {
+      font-family: var(--font-head);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .star-card-price-block {}
+
+    .star-card-old {
+      font-size: 1rem;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .star-card-new {
+      font-family: var(--font-head);
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .star-card-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* SOFTWARE CARD — destacada, ligeramente más compacta que star-card */
+    .software-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, var(--bg3), rgba(255, 60, 95, .04));
+      border: 1.5px solid rgba(255, 60, 95, .35);
+      border-radius: var(--radius);
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 0;
+      overflow: hidden;
+      transition: all var(--transition);
+    }
+
+    .software-card:hover {
+      border-color: rgba(255, 60, 95, .65);
+      transform: translateY(-3px);
+      box-shadow: 0 18px 50px rgba(255, 60, 95, .12);
+    }
+
+    .software-card::before {
+      display: none;
+    }
+
+    /* cancel generic card glow */
+    .software-card-left {
+      padding: 34px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .software-card-right {
+      background: linear-gradient(135deg, rgba(255, 60, 95, .07), rgba(124, 58, 237, .07));
+      border-left: 1px solid rgba(255, 60, 95, .18);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 34px 36px;
+      text-align: center;
+    }
+
+    .software-card-icon {
+      font-size: 3.2rem;
+      line-height: 1;
+      filter: drop-shadow(0 0 18px rgba(255, 60, 95, .35));
+    }
+
+    .software-card-cta-label {
+      font-family: var(--font-head);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #ff6b8a;
+    }
+
+    .software-card-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn-card.software-btn {
+      border-color: rgba(255, 60, 95, .5);
+      color: #ff6b8a;
+      background: rgba(255, 60, 95, .07);
+      width: 100%;
+      max-width: 260px;
+    }
+
+    .btn-card.software-btn:hover {
+      background: rgba(255, 60, 95, .85);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    /* ─── ABOUT ────────────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-visual-inner {
+      width: 80%;
+      height: 80%;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--bg2), var(--surface));
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .about-glyph {
+      font-size: 4rem;
+      filter: grayscale(.2);
+    }
+
+    .about-float {
+      position: absolute;
+      padding: 10px 18px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-family: var(--font-head);
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .2);
+      animation: floatAnim 3s ease-in-out infinite;
+    }
+
+    .about-float:nth-child(2) {
+      top: 12%;
+      right: -20px;
+      animation-delay: .5s;
+    }
+
+    .about-float:nth-child(3) {
+      bottom: 14%;
+      left: -20px;
+      animation-delay: 1s;
+    }
+
+    @keyframes floatAnim {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .about-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 36px;
+    }
+
+    .pillar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      transition: all var(--transition);
+    }
+
+    .pillar:hover {
+      border-color: var(--accent);
+    }
+
+    .pillar-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .pillar-title {
+      font-family: var(--font-head);
+      font-size: .9rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .pillar-desc {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    /* ─── HOW IT WORKS ─────────────────────────────────────────────── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+      z-index: 0;
+    }
+
+    .step {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: .95rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .step-desc {
+      font-size: .82rem;
+      color: var(--muted);
+    }
+
+    /* ─── CONTACT ──────────────────────────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(0, 229, 255, .08);
+      border: 1px solid rgba(0, 229, 255, .15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-bottom: 2px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .contact-val {
+      font-weight: 600;
+      font-size: .95rem;
+    }
+
+    /* FORM */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg2);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: .9rem;
+      color: var(--text);
+      transition: border-color var(--transition);
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .form-group select option {
+      background: var(--bg2);
+    }
+
+    .form-submit {
+      margin-top: 20px;
+      width: 100%;
+      padding: 15px;
+      background: var(--accent);
+      color: #080c12;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .95rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .form-submit:hover {
+      background: #33ecff;
+      transform: translateY(-2px);
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 24px;
+      color: var(--accent);
+      font-family: var(--font-head);
+      font-weight: 700;
+    }
+
+    .wompi-section {
+      margin-top: 28px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    .wompi-label {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    /* Wompi button — sin usuario activo, estilo placeholder */
+    .wompi-placeholder {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(124, 58, 237, .08);
+      border: 1.5px dashed rgba(124, 58, 237, .3);
+      border-radius: 12px;
+      padding: 14px 18px;
+      color: #a78bfa;
+      font-size: .85rem;
+      font-weight: 600;
+    }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 60px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .footer-desc {
+      font-size: .87rem;
+      color: var(--muted);
+      max-width: 280px;
+      line-height: 1.6;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: .85rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      font-size: .88rem;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: .8rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* WhatsApp floating */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 200;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(37, 211, 102, .4);
+      font-size: 1.5rem;
+      color: #fff;
+      transition: all var(--transition);
+      animation: waBounce 2s ease-in-out infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 32px rgba(37, 211, 102, .55);
+      animation: none;
+    }
+
+    @keyframes waBounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    /* ─── TEAM ─────────────────────────────────────────────────────── */
+    .team-row {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 56px;
+    }
+
+    .team-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px 28px;
+      flex: 0 0 220px;
+      max-width: 220px;
+      text-align: center;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .team-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .25);
+    }
+
+    .team-card:hover::before {
+      opacity: 1;
+    }
+
+    /* FOTO: reemplaza el div.team-avatar por <img src="assets/team/nombre.jpg" ... > */
+    .team-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent);
+      flex-shrink: 0;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      box-shadow: 0 0 0 6px rgba(0, 229, 255, .08);
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .team-avatar-placeholder {
+      font-size: 2.2rem;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .team-name {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .team-role {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .team-accent-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin: 0 auto;
+    }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 1280px) and (min-width: 1025px) {
+      .card {
+        padding: 22px;
+      }
+      .card-name {
+        font-size: 1.05rem;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .about-visual {
+        max-width: 380px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+      }
+
+      .steps::before {
+        display: none;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .star-card {
+        grid-template-columns: 1fr;
+      }
+
+      .star-card-right {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+
+      .software-card {
+        grid-template-columns: 1fr;
+      }
+
+      .software-card-right {
+        border-left: none;
+        border-top: 1px solid rgba(255, 60, 95, .18);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-actions .btn {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        gap: 28px;
+      }
+
+      .about-pillars {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .star-card-features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+      }
+
+      .hero-ctas .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────────────────────────── -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="logo" aria-label="Movik Pages">
+        <img src="LogoMovikPages/Gemini_Generated_Image_uzlx30uzlx30uzlx.png" alt="Movik Pages"
+          style="height:38px;width:38px;object-fit:cover;border-radius:50%;" />
+        Movik <span>Pages</span>
+      </a>
+
+      <ul class="nav-links" role="navigation" aria-label="Menú principal">
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">🌙</button>
+        <a href="#contacto" class="btn btn-primary" style="padding:10px 22px;font-size:.84rem;">Comenzar →</a>
+        <button class="hamburger" id="hamburger" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menú móvil">
+    <a href="#productos" class="mobile-link">Productos</a>
+    <a href="#nosotros" class="mobile-link">Nosotros</a>
+    <a href="#equipo" class="mobile-link">Equipo</a>
+    <a href="#como-funciona" class="mobile-link">Cómo funciona</a>
+    <a href="#contacto" class="mobile-link">Contacto</a>
+    <a href="https://wa.me/573045673606" target="_blank" rel="noopener noreferrer" class="mobile-link" style="color:#25d366">💬
+      WhatsApp</a>
+  </div>
+
+  <!-- ─── HERO ──────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">Tecnología en movimiento</div>
+        <h1>Tu negocio, <em>listo para vender</em> en una semana</h1>
+        <p>Diseñamos sitios web estáticos de alto impacto, gestionamos tu presencia digital y desarrollamos aplicativos
+          a medida. Rápido, sin fricción y con resultados.</p>
+        <div class="hero-ctas">
+          <a href="#productos" class="btn btn-primary">Ver planes →</a>
+          <a href="https://wa.me/573045673606?text=Hola%20Movik%20Pages%2C%20quiero%20información%20sobre%20sus%20servicios"
+            target="_blank" rel="noopener noreferrer" class="btn btn-outline">💬 Hablar por WhatsApp</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">+50</div>
+            <div class="stat-label">Sitios entregados</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">7 días</div>
+            <div class="stat-label">Tiempo de entrega</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num stat-symbol">∞</div>
+            <div class="stat-label">Hosting gratis de por vida</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Sitios responsivos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TICKER ──────────────────────────────────────────────────────── -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker">
+      <!-- First copy -->
+      <div class="ticker-item"><span class="dot"></span>Landing Pages</div>
+      <div class="ticker-item"><span class="dot"></span>Marketing Digital</div>
+      <div class="ticker-item"><span class="dot"></span>Google Maps</div>
+      <div class="ticker-item"><span class="dot"></span>Catálogos QR</div>
+      <div class="ticker-item"><span class="dot"></span>Redes Sociales</div>
+      <div class="ticker-item"><span class="dot"></span>Reels de Lanzamiento</div>
+      <div class="ticker-item"><span class="dot"></span>Meta Ads</div>
+      <div class="ticker-item"><span class="dot"></span>Correo Profesional</div>
+      <div class="ticker-item"><span class="dot"></span>Dominio .com incluido</div>
+      <div class="ticker-item"><span class="dot"></span>Carga Ultra-Rápida</div>
+      <div class="ticker-item"><span class="dot"></span>SEO Local</div>
+      <div class="ticker-item"><span class="dot"></span>Soporte VIP</div>
+      <!-- Duplicate for seamless loop -->
+      <div class="ticker-item"><span class="dot"></span>Landing Pages</div>
+      <div class="ticker-item"><span class="dot"></span>Marketing Digital</div>
+      <div class="ticker-item"><span class="dot"></span>Google Maps</div>
+      <div class="ticker-item"><span class="dot"></span>Catálogos QR</div>
+      <div class="ticker-item"><span class="dot"></span>Redes Sociales</div>
+      <div class="ticker-item"><span class="dot"></span>Reels de Lanzamiento</div>
+      <div class="ticker-item"><span class="dot"></span>Meta Ads</div>
+      <div class="ticker-item"><span class="dot"></span>Correo Profesional</div>
+      <div class="ticker-item"><span class="dot"></span>Dominio .com incluido</div>
+      <div class="ticker-item"><span class="dot"></span>Carga Ultra-Rápida</div>
+      <div class="ticker-item"><span class="dot"></span>SEO Local</div>
+      <div class="ticker-item"><span class="dot"></span>Soporte VIP</div>
+    </div>
+  </div>
+
+  <!-- ─── PRODUCTS ────────────────────────────────────────────────────── -->
+  <section class="section" id="productos">
+    <div class="container">
+      <div class="products-header">
+        <div>
+          <div class="tag">Nuestros planes</div>
+          <h2 class="section-title">Elige tu <span class="accent">nivel de presencia</span></h2>
+          <p class="section-sub">Desde tu primera presencia web hasta una estrategia digital completa.</p>
+        </div>
+        <div class="level-tabs" role="tablist">
+          <button class="level-tab active" onclick="filterLevel('all')" role="tab">Todos</button>
+          <button class="level-tab" onclick="filterLevel('1')" role="tab">🟢 Esencial</button>
+          <button class="level-tab" onclick="filterLevel('2')" role="tab">🟡 Profesional</button>
+          <button class="level-tab" onclick="filterLevel('3')" role="tab">🔵 Recurrente</button>
+        </div>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+
+        <!-- NIVEL 1 — LANDING PAGE -->
+        <div class="card" data-level="1">
+          <div class="card-header">
+            <div class="card-level">🟢 Nivel 1 — Presencia Esencial</div>
+            <div class="card-name">Plan Landing Page Estática</div>
+          </div>
+          <div class="card-img-wrap">
+            <img src="planes/Plan Landing Page Estatica.png" alt="Landing Page Estática" class="card-img"
+              style="object-fit:cover">
+          </div>
+          <div class="price-block">
+            <span class="price-old">$480.000</span>
+            <span class="price-new">$349.000</span>
+            <span class="price-period">COP / pago único</span>
+          </div>
+          <ul class="card-features">
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Diseño de 1 sección larga profesional
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Dominio .com incluido
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Hosting GRATIS de por vida
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Carga ultra-rápida (Tecnología Estática)
+            </li>
+          </ul>
+          <div class="card-cta">
+            <button class="btn-card wompi-btn" onclick="goWompi('Plan Landing Page Estática', 349000)">💳 Pagar ahora —
+              $349.000</button>
+            <a href="https://wa.me/573045673606?text=Hola,%20quiero%20el%20Plan%20Landing%20Page%20Estática"
+              target="_blank" rel="noopener noreferrer" class="btn-card whatsapp-btn" style="margin-top:10px">💬 Consultar por
+              WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- NIVEL 1 — CATÁLOGO QR -->
+        <div class="card" data-level="1">
+          <div class="card-header">
+            <div class="card-level">🟢 Nivel 1 — Presencia Esencial</div>
+            <div class="card-name">Plan Catálogo QR Digital</div>
+          </div>
+          <!-- FLYER: <img src="assets/flyers/catalogo-qr.jpg" alt="Catálogo QR" class="card-img" style="object-fit:cover"> -->
+          <div class="card-img-wrap">
+            <img src="planes/Plan Catalogo Qr.png" alt="Catálogo QR" class="card-img" style="object-fit:cover">
+          </div>
+          <div class="price-block">
+            <span class="price-old">$350.000</span>
+            <span class="price-new">$249.000</span>
+            <span class="price-period">COP / pago único</span>
+          </div>
+          <ul class="card-features">
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Menú / Catálogo móvil optimizado
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Código QR listo para impresión
+            </li>
+          </ul>
+          <div class="card-cta">
+            <button class="btn-card wompi-btn" onclick="goWompi('Plan Catálogo QR Digital', 249000)">💳 Pagar ahora —
+              $249.000</button>
+            <a href="https://wa.me/573045673606?text=Hola,%20quiero%20el%20Plan%20Catálogo%20QR%20Digital"
+              target="_blank" rel="noopener noreferrer" class="btn-card whatsapp-btn" style="margin-top:10px">💬 Consultar por
+              WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- NIVEL 1 — GOOGLE BUSINESS -->
+        <div class="card" data-level="1">
+          <div class="card-header">
+            <div class="card-level">🟢 Nivel 1 — Presencia Esencial</div>
+            <div class="card-name">Configuración Google Business Pro</div>
+          </div>
+          <div class="card-img-wrap">
+            <img src="planes/Configuración Google Business.png" alt="Google Business Pro" class="card-img"
+              style="object-fit:cover">
+          </div>
+          <div class="price-block">
+            <span class="price-old">$150.000</span>
+            <span class="price-new">$120.000</span>
+            <span class="price-period">COP / pago único</span>
+          </div>
+          <ul class="card-features">
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Optimización completa de Google Maps
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>10 fotos con SEO local aplicado
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Aparece en búsquedas locales
+            </li>
+          </ul>
+          <div class="card-cta">
+            <button class="btn-card wompi-btn" onclick="goWompi('Google Business Pro', 120000)">💳 Pagar ahora —
+              $120.000</button>
+            <a href="https://wa.me/573045673606?text=Hola,%20quiero%20la%20Configuración%20Google%20Business%20Pro"
+              target="_blank" rel="noopener noreferrer" class="btn-card whatsapp-btn" style="margin-top:10px">💬 Consultar por
+              WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- NIVEL 2 — WEB CORPORATIVA -->
+        <div class="card" data-level="2">
+          <div class="card-header">
+            <div class="card-level">🟡 Nivel 2 — Crecimiento Profesional</div>
+            <div class="card-name">Web Corporativa Multi-sección</div>
+          </div>
+          <div class="card-img-wrap">
+            <img src="planes/Web corporativa multisección.png" alt="Web Corporativa" class="card-img"
+              style="object-fit:cover">
+          </div>
+          <div class="price-block">
+            <span class="price-old">$850.000</span>
+            <span class="price-new">$599.000</span>
+            <span class="price-period">COP / pago único</span>
+          </div>
+          <ul class="card-features">
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Hasta 5 secciones independientes
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Diseño corporativo de autoridad
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Correo Profesional (Zoho / Google)
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Dominio .com + Hosting de por vida
+            </li>
+          </ul>
+          <div class="card-cta">
+            <button class="btn-card wompi-btn" onclick="goWompi('Web Corporativa Multi-sección', 599000)">💳 Pagar ahora
+              — $599.000</button>
+            <a href="https://wa.me/573045673606?text=Hola,%20quiero%20la%20Web%20Corporativa%20Multi-sección"
+              target="_blank" rel="noopener noreferrer" class="btn-card whatsapp-btn" style="margin-top:10px">💬 Consultar por
+              WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- NIVEL 2 — COMBO VISIBILIDAD -->
+        <div class="card featured" data-level="2">
+          <div class="card-header">
+            <div class="card-level">🟡 Nivel 2 — Crecimiento Profesional</div>
+            <div class="card-name">Combo "Visibilidad Local"</div>
+          </div>
+          <div class="card-img-wrap">
+            <div class="card-badge badge-recommended">⭐ Popular</div>
+            <img src="planes/Como Visibilidad Local.png" alt="Combo Visibilidad Local" class="card-img"
+              style="object-fit:cover">
+          </div>
+          <div class="price-block">
+            <span class="price-old">$1.100.000</span>
+            <span class="price-new">$749.000</span>
+            <span class="price-period">COP / pago único</span>
+          </div>
+          <ul class="card-features">
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Web Corporativa completa
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Configuración Google Maps Pro
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>2 Reels de lanzamiento incluidos
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Dominio + Hosting de por vida
+            </li>
+          </ul>
+          <div class="card-cta">
+            <button class="btn-card primary" onclick="goWompi('Combo Visibilidad Local', 749000)">💳 Pagar ahora —
+              $749.000</button>
+            <a href="https://wa.me/573045673606?text=Hola,%20quiero%20el%20Combo%20Visibilidad%20Local" target="_blank"
+              rel="noopener noreferrer" class="btn-card whatsapp-btn" style="margin-top:10px">💬 Consultar por WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- NIVEL 3 — META ADS -->
+        <div class="card" data-level="3">
+          <div class="card-header">
+            <div class="card-level">🔵 Nivel 3 — Estrategia Recurrente</div>
+            <div class="card-name">Plan "Tráfico Garantizado" (Ads)</div>
+          </div>
+          <div class="card-img-wrap">
+            <div class="card-badge badge-monthly">Mensual</div>
+            <img src="planes/Plan Trafico Garantizado.png" alt="Plan Tráfico Garantizado" class="card-img"
+              style="object-fit:cover">
+          </div>
+          <div class="price-block">
+            <span class="price-old">$350.000</span>
+            <span class="price-new">$299.000</span>
+            <span class="price-period">COP / mes</span>
+          </div>
+          <ul class="card-features">
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Gestión de pauta Meta (Facebook/Instagram)
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Reportes mensuales de rendimiento
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Optimización continua de campañas
+            </li>
+          </ul>
+          <div class="card-cta">
+            <a href="https://wa.me/573045673606?text=Hola,%20quiero%20el%20Plan%20Tráfico%20Garantizado" target="_blank"
+              rel="noopener noreferrer" class="btn-card whatsapp-btn">💬 Consultar — $299.000/mes</a>
+          </div>
+        </div>
+
+        <!-- NIVEL 3 — REDES -->
+        <div class="card" data-level="3">
+          <div class="card-header">
+            <div class="card-level">🔵 Nivel 3 — Estrategia Recurrente</div>
+            <div class="card-name">Plan "Redes y Comunidad"</div>
+          </div>
+          <div class="card-img-wrap">
+            <div class="card-badge badge-monthly">Mensual</div>
+            <img src="planes/Plan Redes y Comunidad.png" alt="Plan Redes y Comunidad" class="card-img"
+              style="object-fit:cover">
+          </div>
+          <div class="price-block">
+            <span class="price-old">$600.000</span>
+            <span class="price-new">$450.000</span>
+            <span class="price-period">COP / mes</span>
+          </div>
+          <ul class="card-features">
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>12 publicaciones mensuales
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Reels + Carruseles creativos
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Gestión básica de comunidad
+            </li>
+          </ul>
+          <div class="card-cta">
+            <a href="https://wa.me/573045673606?text=Hola,%20quiero%20el%20Plan%20Redes%20y%20Comunidad" target="_blank"
+              rel="noopener noreferrer" class="btn-card whatsapp-btn">💬 Consultar — $450.000/mes</a>
+          </div>
+        </div>
+
+        <!-- NIVEL 3 — MANTENIMIENTO VIP -->
+        <div class="card" data-level="3">
+          <div class="card-header">
+            <div class="card-level">🔵 Nivel 3 — Estrategia Recurrente</div>
+            <div class="card-name">Mantenimiento y Soporte VIP</div>
+          </div>
+          <div class="card-img-wrap">
+            <div class="card-badge badge-monthly">Mensual</div>
+            <img src="planes/Plan Mantenimiento y Soporte.png" alt="Mantenimiento VIP" class="card-img"
+              style="object-fit:cover">
+          </div>
+          <div class="price-block">
+            <span class="price-old">$80.000</span>
+            <span class="price-new">$50.000</span>
+            <span class="price-period">COP / mes</span>
+          </div>
+          <ul class="card-features">
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Cambios menores ilimitados
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Soporte prioritario 24/7
+            </li>
+            <li class="feature-item">
+              <div class="feature-icon">✓</div>Actualizaciones de contenido
+            </li>
+          </ul>
+          <div class="card-cta">
+            <a href="https://wa.me/573045673606?text=Hola,%20quiero%20el%20Mantenimiento%20VIP" target="_blank"
+              rel="noopener noreferrer" class="btn-card whatsapp-btn">💬 Consultar — $50.000/mes</a>
+          </div>
+        </div>
+
+        <!-- COMBO ESTRELLA — FULL WIDTH -->
+        <div class="card star-card" data-level="all">
+          <div class="star-card-left">
+            <div>
+              <div class="card-badge badge-recommended" style="position:static;display:inline-block;margin-bottom:12px">
+                🏆 Recomendado</div>
+              <div class="card-level">Combo Estrella — Todo en uno</div>
+              <div class="card-name" style="font-size:1.6rem">Paquete Acelerador Digital</div>
+              <p style="color:var(--muted);font-size:.9rem;margin-top:10px;max-width:440px">
+                Todo lo que un negocio necesita para vender en una semana, por menos de un millón.
+              </p>
+            </div>
+            <img src="planes/Paquete Acelerador Digital.png" alt="Paquete Acelerador Digital" class="card-img"
+              style="object-fit:cover;max-width:360px">
+            <ul class="card-features star-card-features">
+              <li class="feature-item">
+                <div class="feature-icon">✓</div>Web Estática Pro completa
+              </li>
+              <li class="feature-item">
+                <div class="feature-icon">✓</div>Configuración Google Maps
+              </li>
+              <li class="feature-item">
+                <div class="feature-icon">✓</div>1er mes de Ads incluido
+              </li>
+              <li class="feature-item">
+                <div class="feature-icon">✓</div>3 Reels de lanzamiento
+              </li>
+              <li class="feature-item">
+                <div class="feature-icon">✓</div>Dominio .com incluido
+              </li>
+              <li class="feature-item">
+                <div class="feature-icon">✓</div>Hosting de por vida
+              </li>
+            </ul>
+          </div>
+          <div class="star-card-right">
+            <div class="star-card-label">Precio especial</div>
+            <div class="star-card-price-block">
+              <div class="star-card-old">$1.500.000</div>
+              <div class="star-card-new">$990.000</div>
+              <div style="font-size:.85rem;color:var(--muted);margin-top:6px">COP · Pago único</div>
+            </div>
+            <button class="btn-card primary" style="width:100%;max-width:280px"
+              onclick="goWompi('Paquete Acelerador Digital', 990000)">💳 Pagar ahora — $990.000</button>
+            <a href="https://wa.me/573045673606?text=Hola,%20quiero%20el%20Paquete%20Acelerador%20Digital"
+              target="_blank" rel="noopener noreferrer" class="btn-card whatsapp-btn" style="width:100%;max-width:280px">💬
+              Consultar por WhatsApp</a>
+            <p style="font-size:.75rem;color:var(--muted)">Respuesta en menos de 2 horas hábiles</p>
+          </div>
+        </div>
+
+        <!-- SOFTWARES / APPS — card destacada -->
+        <div class="card software-card" data-level="all">
+
+          <div class="software-card-left">
+            <div>
+              <div class="card-badge badge-contact" style="position:static;display:inline-block;margin-bottom:12px">⚙️
+                Desarrollo a medida</div>
+              <div class="card-level" style="color:#ff6b8a;margin-top:4px">Servicio personalizado</div>
+              <div class="card-name" style="font-size:1.45rem;margin-top:6px">Aplicativos y Software</div>
+              <p style="font-size:.9rem;color:var(--muted);margin-top:12px;max-width:420px;line-height:1.65">
+                Construimos aplicaciones web, paneles administrativos, automatizaciones y software a medida para tu
+                operación. Cada proyecto comienza con una consultoría gratuita para entender tu visión.
+              </p>
+            </div>
+
+            <img src="planes/Aplicativos y Software.png" alt="Software y Aplicativos" class="card-img"
+              style="object-fit:cover;max-width:380px">
+
+            <ul class="card-features software-card-features">
+              <li class="feature-item">
+                <div class="feature-icon" style="background:rgba(255,60,95,.12);color:#ff6b8a">✓</div>Apps web a medida
+              </li>
+              <li class="feature-item">
+                <div class="feature-icon" style="background:rgba(255,60,95,.12);color:#ff6b8a">✓</div>Paneles
+                administrativos
+              </li>
+              <li class="feature-item">
+                <div class="feature-icon" style="background:rgba(255,60,95,.12);color:#ff6b8a">✓</div>Automatizaciones
+              </li>
+              <li class="feature-item">
+                <div class="feature-icon" style="background:rgba(255,60,95,.12);color:#ff6b8a">✓</div>Integraciones API
+              </li>
+              <li class="feature-item">
+                <div class="feature-icon" style="background:rgba(255,60,95,.12);color:#ff6b8a">✓</div>Sistemas de
+                reservas
+              </li>
+              <li class="feature-item">
+                <div class="feature-icon" style="background:rgba(255,60,95,.12);color:#ff6b8a">✓</div>Cotización
+                personalizada
+              </li>
+            </ul>
+          </div>
+
+          <div class="software-card-right">
+            <div class="software-card-icon">⚡</div>
+            <div>
+              <div class="software-card-cta-label">¿Tienes un proyecto?</div>
+              <div
+                style="font-family:var(--font-head);font-size:1.5rem;font-weight:800;line-height:1.15;margin-top:8px;color:var(--text)">
+                Cuéntanos tu idea,<br>nosotros la<br><span style="color:#ff6b8a">construimos</span></div>
+            </div>
+            <p style="font-size:.82rem;color:var(--muted);max-width:220px;line-height:1.55">
+              Consultoría inicial <strong style="color:var(--text)">gratuita</strong>. Cotización sin compromiso en 24
+              horas hábiles.
+            </p>
+            <a href="https://wa.me/573045673606?text=Hola,%20quiero%20información%20sobre%20desarrollo%20de%20software%20a%20medida"
+              target="_blank" rel="noopener noreferrer" class="btn-card software-btn">💬 Solicitar consultoría</a>
+            <a href="mailto:moviksaas@gmail.com?subject=Proyecto%20de%20Software%20a%20medida"
+              class="btn-card software-btn" style="margin-top:2px">✉️ Enviar brief por correo</a>
+            <p style="font-size:.72rem;color:var(--muted)">Respuesta en menos de 24 h hábiles</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ──────────────────────────────────────────────────────────── -->
+  <section class="section" id="nosotros" style="background:var(--bg2)">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual">
+          <div class="about-visual-inner">
+            <img src="LogoMovikPages/Gemini_Generated_Image_uzlx30uzlx30uzlx.png" alt="Logo Movik Pages"
+              style="width: 200px; height: 200px; object-fit: fill; border-radius: 50%; margin-bottom: 10px;">
+            <div style="font-family:var(--font-head);font-weight:800;font-size:1.1rem;color:var(--text)">Movik Pages
+            </div>
+            <div style="font-size:.8rem;color:var(--muted)">Tecnología en movimiento</div>
+          </div>
+          <div class="about-float">🚀 <span>Entrega en 7 días</span></div>
+          <div class="about-float">⭐ <span>Hosting de por vida</span></div>
+        </div>
+        <div>
+          <div class="tag">Quiénes somos</div>
+          <h2 class="section-title">Convertimos ideas en <span class="accent">presencia digital</span> que vende</h2>
+          <p style="color:var(--muted);margin-bottom:20px">
+            Movik nació de una sola premisa: que cualquier negocio colombiano, sin importar su tamaño, merece tecnología
+            de startup. Rápida, confiable y sin excusas.
+          </p>
+          <p style="color:var(--muted)">
+            Nuestro ADN es el movimiento — diseñamos, lanzamos y escalamos tu presencia digital con la misma agilidad
+            que marcas como Rappi o Uber. Somos directos, modernos y optimistas.
+            <em>"Listo. En 2 pasos queda."</em>
+          </p>
+          <div class="about-pillars">
+            <div class="pillar">
+              <div class="pillar-icon">⚡</div>
+              <div class="pillar-title">Velocidad</div>
+              <div class="pillar-desc">Sitios que cargan en milisegundos, entregas en días.</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon">🌍</div>
+              <div class="pillar-title">Mentalidad global</div>
+              <div class="pillar-desc">Tecnología de startup lista para crecer sin fronteras.</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon">🔒</div>
+              <div class="pillar-title">Sin fricción</div>
+              <div class="pillar-desc">Procesos claros, comunicación directa y resultados reales.</div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-icon">📈</div>
+              <div class="pillar-title">Escalabilidad</div>
+              <div class="pillar-desc">Desde una landing hasta un ecosistema digital completo.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HOW IT WORKS ──────────────────────────────────────────────────── -->
+  <section class="section" id="como-funciona">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:60px">
+        <div class="tag">Proceso</div>
+        <h2 class="section-title">Listo en <span class="accent">4 pasos</span></h2>
+        <p class="section-sub" style="margin:0 auto">Sin reuniones interminables. Sin tecnicismos. Solo resultados.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title">Elige tu plan</div>
+          <div class="step-desc">Selecciona el servicio que se adapta a tu negocio. ¿Dudas? Te asesoramos gratis por
+            WhatsApp.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title">Comparte tu info</div>
+          <div class="step-desc">Nos envías logo, textos, colores y referencias. Nosotros nos encargamos del resto.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title">Revisión y ajustes</div>
+          <div class="step-desc">Te mostramos una vista previa. Ajustamos lo que necesites sin costo adicional.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-title">¡A vender!</div>
+          <div class="step-desc">Publicamos tu sitio en vivo con tu dominio y te entregamos los accesos. Todo listo.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TEAM ────────────────────────────────────────────────────────── -->
+  <section class="section" id="equipo" style="background:var(--bg2)">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:0">
+        <div class="tag">Nuestro equipo</div>
+        <h2 class="section-title">Las personas detrás de <span class="accent">Movik Pages</span></h2>
+        <p class="section-sub" style="margin:0 auto">Un equipo joven, estructurado y con mentalidad global. Rápidos,
+          claros y confiables.</p>
+      </div>
+      <div class="team-row">
+
+        <!-- INTEGRANTE 1 -->
+        <div class="team-card">
+          <img src="Avatares/Sebastian Upegui.png" alt="Sebastián Upegui" class="team-avatar"
+            style="width:100px;height:100px;object-fit:cover;border-radius:50%;border:3px solid var(--accent);">
+          <div>
+            <div class="team-name">Sebastián Upegui</div>
+            <div class="team-role">Analista de Desarrollo</div>
+          </div>
+          <div class="team-accent-dot"></div>
+        </div>
+
+        <!-- INTEGRANTE 2 -->
+        <div class="team-card">
+          <img src="Avatares/Monica Dávila.png" alt="Mónica Dávila" class="team-avatar"
+            style="width:100px;height:100px;object-fit:cover;border-radius:50%;border:3px solid var(--accent);">
+          <div>
+            <div class="team-name">Mónica Dávila</div>
+            <div class="team-role">Planeadora de Desarrollo</div>
+          </div>
+          <div class="team-accent-dot"></div>
+        </div>
+
+        <!-- INTEGRANTE 3 -->
+        <div class="team-card">
+          <img src="Avatares/Dickson Moreno.png" alt="Dickson Moreno" class="team-avatar"
+            style="width:100px;height:100px;object-fit:cover;border-radius:50%;border:3px solid var(--accent);">
+          <div>
+            <div class="team-name">Dickson Moreno</div>
+            <div class="team-role">Analista de Desarrollo</div>
+          </div>
+          <div class="team-accent-dot"></div>
+        </div>
+
+        <!-- INTEGRANTE 4 -->
+        <div class="team-card">
+          <img src="Avatares/Natalia Upegui.png" alt="Natalia Upegui" class="team-avatar"
+            style="width:100px;height:100px;object-fit:cover;border-radius:50%;border:3px solid var(--accent);">
+          <div>
+            <div class="team-name">Natalia Upegui</div>
+            <div class="team-role">Administradora de Empresas</div>
+          </div>
+          <div class="team-accent-dot"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ──────────────────────────────────────────────────────── -->
+  <section class="section" id="contacto" style="background:var(--bg2)">
+    <div class="container">
+      <div style="margin-bottom:56px">
+        <div class="tag">Contacto</div>
+        <h2 class="section-title">Hablemos de tu <span class="accent">próximo proyecto</span></h2>
+        <p class="section-sub">Cuéntanos qué necesitas y te respondemos en menos de 2 horas hábiles.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>
+              <div class="contact-label">WhatsApp / Llamadas</div>
+              <a href="https://wa.me/573045673606" target="_blank" rel="noopener noreferrer" class="contact-val"
+                style="color:var(--accent)">+57 304 567 3606</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">Correo electrónico</div>
+              <a href="mailto:moviksaas@gmail.com" class="contact-val"
+                style="color:var(--accent)">moviksaas@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <div class="contact-label">Horario de atención</div>
+              <div class="contact-val">Lun – Vie · 8am a 6pm (GMT-5, Colombia)</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-label">Operamos desde</div>
+              <div class="contact-val">Colombia · Cobertura nacional-Internacional con previa Solicitud</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <form id="contactForm" onsubmit="submitForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+              </div>
+              <div class="form-group">
+                <label for="empresa">Empresa / Negocio</label>
+                <input type="text" id="empresa" name="empresa" placeholder="Nombre del negocio" />
+              </div>
+            </div>
+            <div class="form-row" style="margin-top:16px">
+              <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required />
+              </div>
+              <div class="form-group">
+                <label for="telefono">WhatsApp / Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="+57 300 000 0000" />
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:16px">
+              <label for="servicio">Servicio de interés</label>
+              <select id="servicio" name="servicio" required>
+                <option value="" disabled selected>Selecciona un plan...</option>
+                <option>Plan Landing Page Estática — $349.000</option>
+                <option>Plan Catálogo QR Digital — $249.000</option>
+                <option>Configuración Google Business Pro — $120.000</option>
+                <option>Web Corporativa Multi-sección — $599.000</option>
+                <option>Combo Visibilidad Local — $749.000</option>
+                <option>Plan Tráfico Garantizado Ads — $299.000/mes</option>
+                <option>Plan Redes y Comunidad — $450.000/mes</option>
+                <option>Mantenimiento y Soporte VIP — $50.000/mes</option>
+                <option>Paquete Acelerador Digital — $990.000</option>
+                <option>Software / Aplicativo a medida</option>
+                <option>Otro / Tengo dudas</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-top:16px">
+              <label for="mensaje">Cuéntanos tu proyecto</label>
+              <textarea id="mensaje" name="mensaje"
+                placeholder="¿Qué necesitas? Mientras más detalle, mejor podemos ayudarte."></textarea>
+            </div>
+            <button type="submit" class="form-submit">✉️ Enviar solicitud</button>
+            <div class="form-success" id="formSuccess">
+              ✅ ¡Listo! Recibimos tu solicitud. Te respondemos pronto.
+            </div>
+          </form>
+
+          <!-- WOMPI — sin usuario activo, placeholder codificado -->
+          <div class="wompi-section">
+            <div class="wompi-label">💳 Pago seguro en línea con Wompi</div>
+            <div class="wompi-placeholder">
+              <!-- WOMPI: cuando tengas cuenta activa, reemplaza este div por el script oficial de Wompi:
+                 <script src="https://checkout.wompi.co/widget.js"
+                   data-render="button"
+                   data-public-key="TU_LLAVE_PUBLICA"
+                   data-currency="COP"
+                   data-amount-in-cents="MONTO_EN_CENTAVOS"
+                   data-reference="REFERENCIA_UNICA">
+                 </script>
+            -->
+              <span>🔒</span>
+              <span>El botón de pago Wompi estará disponible una vez actives tu cuenta. Paga de forma segura con
+                tarjeta, PSE o Nequi.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo" aria-label="Movik Pages">
+            <img src="LogoMovikPages/Gemini_Generated_Image_uzlx30uzlx30uzlx.png" alt="Movik Pages"
+              style="height:38px;width:38px;object-fit:cover;border-radius:50%;" />
+            Movik <span>Pages</span>
+          </a>
+          <p class="footer-desc">Tecnología en movimiento para escalar ideas rápido y sin fricción. Tu presencia
+            digital, lista para vender.</p>
+          <div style="display:flex;gap:12px;margin-top:4px">
+            <a href="https://wa.me/573045673606" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+              style="font-size:1.4rem">💬</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Servicios</div>
+          <ul class="footer-links">
+            <li><a href="#productos">Landing Pages</a></li>
+            <li><a href="#productos">Catálogos QR</a></li>
+            <li><a href="#productos">Google Business</a></li>
+            <li><a href="#productos">Web Corporativa</a></li>
+            <li><a href="#productos">Meta Ads</a></li>
+            <li><a href="#productos">Redes Sociales</a></li>
+            <li><a href="#productos">Software a medida</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contacto</div>
+          <ul class="footer-links">
+            <li><a href="https://wa.me/573045673606" target="_blank" rel="noopener noreferrer">+57 304 567 3606</a></li>
+            <li><a href="mailto:moviksaas@gmail.com">moviksaas@gmail.com</a></li>
+            <li><a href="#como-funciona">Cómo funciona</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Movik Pages. Todos los derechos reservados.</span>
+        <span style="color:var(--accent)">⚡ Tecnología en movimiento</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp flotante -->
+  <a href="https://wa.me/573045673606?text=Hola%20Movik%20Pages%2C%20quiero%20información" target="_blank"
+    rel="noopener noreferrer" class="whatsapp-float" aria-label="Contactar por WhatsApp">💬</a>
+
+  <!-- ─── SCRIPTS ─────────────────────────────────────────────────────── -->
+  <script>
+    // ── Theme toggle ──────────────────────────────────────────────
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('movik-theme') || 'dark';
+    html.setAttribute('data-theme', saved);
+    themeBtn.textContent = saved === 'dark' ? '🌙' : '☀️';
+
+    themeBtn.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      themeBtn.textContent = next === 'dark' ? '🌙' : '☀️';
+      localStorage.setItem('movik-theme', next);
+    });
+
+    // ── Hamburger ─────────────────────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mobile-link').forEach(l => {
+      l.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    // ── Level filter ──────────────────────────────────────────────
+    function filterLevel(level) {
+      document.querySelectorAll('.level-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('.card[data-level]').forEach(card => {
+        const cl = card.getAttribute('data-level');
+        card.style.display = (level === 'all' || cl === level || cl === 'all') ? '' : 'none';
+      });
+    }
+
+    // ── Contact form → mailto ──────────────────────────────────────
+    function submitForm(e) {
+      e.preventDefault();
+      const f = e.target;
+      const nombre = f.nombre.value;
+      const empresa = f.empresa.value;
+      const email = f.email.value;
+      const telefono = f.telefono.value;
+      const servicio = f.servicio.value;
+      const mensaje = f.mensaje.value;
+
+      const body = `Nombre: ${nombre}%0AEmpresa: ${empresa}%0AEmail: ${email}%0ATelefono: ${telefono}%0AServicio: ${servicio}%0AMensaje: ${mensaje}`;
+      const subject = `Solicitud Movik Pages - ${servicio}`;
+      window.location.href = `mailto:moviksaas@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+      document.getElementById('formSuccess').style.display = 'block';
+      f.reset();
+      setTimeout(() => { document.getElementById('formSuccess').style.display = 'none'; }, 5000);
+    }
+
+    // ── Wompi placeholder ──────────────────────────────────────────
+    function goWompi(plan, amount) {
+      // WOMPI: cuando tengas cuenta activa, reemplaza esta función por la lógica del checkout de Wompi
+      // Por ahora, redirige a WhatsApp con el plan seleccionado
+      const msg = `Hola Movik Pages, quiero pagar el ${plan} por $${amount.toLocaleString('es-CO')} COP. ¿Cómo procedo?`;
+      window.open(`https://wa.me/573045673606?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // ── Scroll reveal ──────────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.card, .pillar, .step, .contact-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity .5s ease, transform .5s ease';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+
+</html>
